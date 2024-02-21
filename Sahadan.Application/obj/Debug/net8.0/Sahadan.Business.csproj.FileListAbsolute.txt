@@ -1,0 +1,17 @@
+/Users/atakanaktakka/Desktop/Sahadan/Sahadan.Business/bin/Debug/net8.0/Sahadan.Business.deps.json
+/Users/atakanaktakka/Desktop/Sahadan/Sahadan.Business/bin/Debug/net8.0/Sahadan.Business.dll
+/Users/atakanaktakka/Desktop/Sahadan/Sahadan.Business/bin/Debug/net8.0/Sahadan.Business.pdb
+/Users/atakanaktakka/Desktop/Sahadan/Sahadan.Business/bin/Debug/net8.0/Sahadan.DataAccess.dll
+/Users/atakanaktakka/Desktop/Sahadan/Sahadan.Business/bin/Debug/net8.0/Sahadan.Entities.dll
+/Users/atakanaktakka/Desktop/Sahadan/Sahadan.Business/bin/Debug/net8.0/Sahadan.DataAccess.pdb
+/Users/atakanaktakka/Desktop/Sahadan/Sahadan.Business/bin/Debug/net8.0/Sahadan.Entities.pdb
+/Users/atakanaktakka/Desktop/Sahadan/Sahadan.Business/obj/Debug/net8.0/Sahadan.Business.csproj.AssemblyReference.cache
+/Users/atakanaktakka/Desktop/Sahadan/Sahadan.Business/obj/Debug/net8.0/Sahadan.Business.GeneratedMSBuildEditorConfig.editorconfig
+/Users/atakanaktakka/Desktop/Sahadan/Sahadan.Business/obj/Debug/net8.0/Sahadan.Business.AssemblyInfoInputs.cache
+/Users/atakanaktakka/Desktop/Sahadan/Sahadan.Business/obj/Debug/net8.0/Sahadan.Business.AssemblyInfo.cs
+/Users/atakanaktakka/Desktop/Sahadan/Sahadan.Business/obj/Debug/net8.0/Sahadan.Business.csproj.CoreCompileInputs.cache
+/Users/atakanaktakka/Desktop/Sahadan/Sahadan.Business/obj/Debug/net8.0/Sahadan.Business.csproj.CopyComplete
+/Users/atakanaktakka/Desktop/Sahadan/Sahadan.Business/obj/Debug/net8.0/Sahadan.Business.dll
+/Users/atakanaktakka/Desktop/Sahadan/Sahadan.Business/obj/Debug/net8.0/refint/Sahadan.Business.dll
+/Users/atakanaktakka/Desktop/Sahadan/Sahadan.Business/obj/Debug/net8.0/Sahadan.Business.pdb
+/Users/atakanaktakka/Desktop/Sahadan/Sahadan.Business/obj/Debug/net8.0/ref/Sahadan.Business.dll
