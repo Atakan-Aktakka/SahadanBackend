@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sahadan.DataAccess.Concrete.EntityFrameWork.Contexts;
 
@@ -10,9 +11,11 @@ using Sahadan.DataAccess.Concrete.EntityFrameWork.Contexts;
 namespace Sahadan.DataAccess.Migrations
 {
     [DbContext(typeof(SahadanContext))]
-    partial class SahadanContextModelSnapshot : ModelSnapshot
+    [Migration("20240221181009_UpdateEntityChanges")]
+    partial class UpdateEntityChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

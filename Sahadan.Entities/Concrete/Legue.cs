@@ -10,6 +10,7 @@ namespace Sahadan.Entities.Concrete
     {
         public int LegueId { get; set; }
         public string LegueName { get; set; }
+        public string LegueLogo { get; set; }
         public int CountryId { get; set; }
         public List<Team> Teams { get; set; }
     }

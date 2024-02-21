@@ -14,6 +14,7 @@ namespace Sahadan.DataAccess.Concrete.EntityFrameWork.Contexts
             optionsBuilder.UseSqlServer("Server=localhost,1433;Database=Sahadan;User Id=SA;Password=reallyStrongPwd123;Encrypt=false;TrustServerCertificate=True;");
         }
         public DbSet<Country> Countrys { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Legue> Legues { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Player> Players { get; set; }
