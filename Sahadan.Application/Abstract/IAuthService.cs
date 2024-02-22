@@ -8,7 +8,8 @@ namespace Sahadan.Application.Abstract
 {
     public interface IAuthService
     {
-        Task<LoginUserModel> Login(LoginUserModel model);
+        Task<UserResponseModel> LoginAsync(LoginUserModel userToLoginDTO);
+        Task<UserResponseModel> RegisterAsync(RegisterUserModel userToRegisterDTO);
        
 
     }

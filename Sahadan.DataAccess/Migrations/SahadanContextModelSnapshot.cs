@@ -83,6 +83,9 @@ namespace Sahadan.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("JerseyNumber")
+                        .HasColumnType("int");
+
                     b.Property<string>("PlayerName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

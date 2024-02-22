@@ -15,7 +15,7 @@ namespace Sahadan.WebAPI.Controllers
     [Route("api/[controller]")]
     public class PlayerController : ControllerBase
     {
-        private IPlayerService _playerService;
+        private readonly IPlayerService _playerService;
 
         public PlayerController(IPlayerService playerService)
         {

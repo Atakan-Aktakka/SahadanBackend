@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Sahadan.DataAccess.Abstract
 {
-    public interface IBaseRepository<TEntity> where TEntity:class
+    public interface IBaseRepository<T> where T:class
     {
-        Task<List<TEntity>> GetAllAsync();
-        Task<TEntity> GetById(int id);
-        Task<TEntity> Add(TEntity entity);
-        Task<TEntity> Update(TEntity entity);
-        Task<TEntity> Delete(TEntity entity);
+        Task<List<T>> GetAllAsync();
+        Task<T> GetById(int id);
+        Task<T> Add(T entity);
+        Task<T> Update(T entity);
+        Task<T> Delete(T entity);
+        Task<T> GetAsync(Expression<Func<T, bool>> filter = null, CancellationToken cancellationToken = default);
+ 
     }
    
 }

@@ -16,7 +16,7 @@ namespace Sahadan.WebAPI.Controllers
     [Route("api/[controller]")]
     public class LegueController : ControllerBase
     {
-        private ILegueService _legueService;
+        private readonly ILegueService _legueService;
 
         public LegueController(ILegueService legueService)
         {

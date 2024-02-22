@@ -16,7 +16,7 @@ namespace Sahadan.WebAPI.Controllers
     [Route("api/[controller]")]
     public class TeamController : ControllerBase
     {
-        private ITeamService _teamService;
+        private readonly ITeamService _teamService;
 
         public TeamController(ITeamService teamService)
         {

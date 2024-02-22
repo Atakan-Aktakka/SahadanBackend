@@ -50,6 +50,10 @@ namespace Sahadan.DataAccess.Concrete.EntityFrameWork
         {
             return await _dbSet.FindAsync(id);
         }
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter = null, CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(filter, cancellationToken);
+        }
 
         public async Task<TEntity> Update(TEntity entity)
         {

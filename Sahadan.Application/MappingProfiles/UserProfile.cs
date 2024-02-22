@@ -14,6 +14,10 @@ namespace Sahadan.Application.MappingProfiles
         {
             CreateMap<CreateUserModel, User>();
             CreateMap<User, UserResponseModel>();
+            CreateMap<User, RegisterUserModel>();
+            CreateMap<RegisterUserModel, User>();
+            CreateMap<User, CreateUserModelResponse>();
+            CreateMap<User, LoginUserModel>();
         }
         
     }

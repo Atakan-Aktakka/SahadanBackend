@@ -13,7 +13,7 @@ namespace Sahadan.WebAPI.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private  IUserService _userService;
+        private readonly IUserService _userService;
 
         public UserController(IUserService userService)
         {
@@ -68,5 +68,6 @@ namespace Sahadan.WebAPI.Controllers
                 return BadRequest(ApiResult<BaseReponseModel>.Failure(new List<string> { ex.Message }));
             }
         }
+
     }
 }

@@ -16,7 +16,7 @@ namespace Sahadan.WebAPI.Controllers
     [Route("api/[controller]")]
     public class CountryController : ControllerBase
     {
-        private ICountryService _countryService;
+        private readonly ICountryService _countryService;
 
         public CountryController(ICountryService countryService)
         {
