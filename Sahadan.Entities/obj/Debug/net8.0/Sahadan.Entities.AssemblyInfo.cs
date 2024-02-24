@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Sahadan.Entities")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a10d67e4973b5ea87453217af37876ebeb31618f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+285d849cefaf6d45d19a310d420bcfc1a126d2fe")]
 [assembly: System.Reflection.AssemblyProductAttribute("Sahadan.Entities")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Sahadan.Entities")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

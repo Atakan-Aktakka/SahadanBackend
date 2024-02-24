@@ -35,7 +35,7 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new() { Title = "Sahadan.WebAPI", Version = "v1" });
     var jwtSecurityScheme = new OpenApiSecurityScheme
     {
-        Scheme = "bearer",
+        Scheme = "Bearer",
         BearerFormat = "JWT",
         Name = "JWT Authentication",
         In = ParameterLocation.Header,

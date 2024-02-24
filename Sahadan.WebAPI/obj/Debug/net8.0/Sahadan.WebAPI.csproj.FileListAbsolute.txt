@@ -290,3 +290,4 @@
 /Users/atakanaktakka/Desktop/SahadanBackend/Sahadan.WebAPI/obj/Debug/net8.0/Sahadan.WebAPI.genruntimeconfig.cache
 /Users/atakanaktakka/Desktop/SahadanBackend/Sahadan.WebAPI/obj/Debug/net8.0/ref/Sahadan.WebAPI.dll
 /Users/atakanaktakka/Desktop/SahadanBackend/Sahadan.WebAPI/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/atakanaktakka/Desktop/SahadanBackend/Sahadan.WebAPI/bin/Debug/net8.0/Microsoft.Extensions.Configuration.Binder.dll

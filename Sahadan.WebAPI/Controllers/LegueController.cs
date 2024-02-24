@@ -32,7 +32,7 @@ namespace Sahadan.WebAPI.Controllers
         {
             return Ok(ApiResult<Legue>.Success(await _legueService.GetLegueById(id)));
         }
-        [HttpGet("country/{id}")]
+        [HttpGet("getbycountry/countryId={id}")]
         public async Task<IActionResult> GetLeguesByCountryId(int id)
         {
             return Ok(ApiResult<IEnumerable<Legue>>.Success(await _legueService.GetLeguesByCountryId(id)));

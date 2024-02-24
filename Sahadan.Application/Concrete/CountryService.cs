@@ -54,6 +54,10 @@ namespace Sahadan.Application.Concrete
         public async Task<Country> GetCountryById(int id)
         {
             var countryList = await _countryrepository.GetById(id);
+            if (countryList == null)
+            {
+                throw new Exception("Country not found");
+            }
             return _mapper.Map<Country>(countryList);
         }
 

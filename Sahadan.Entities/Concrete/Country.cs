@@ -14,4 +14,5 @@ namespace Sahadan.Entities.Concrete
         public string CountryLogo { get; set; }
         public List<Legue> Legues { get; set; }
     }
+    
 }

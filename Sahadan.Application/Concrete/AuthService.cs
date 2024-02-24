@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Azure.Core;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -30,6 +31,11 @@ namespace Sahadan.Application.Concrete
             _mapper = mapper;
             _configuration = configuration;
 
+        }
+
+        public Task<AccessToken> CreateAccessToken(UserTest user)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<UserResponseModel> LoginAsync(LoginUserModel userToLoginDTO)
@@ -59,6 +65,12 @@ namespace Sahadan.Application.Concrete
 
             return userToReturn;
         }
+
+        public Task<bool> UserExists(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
         private string GenerateToken(int userId, string username)
         {
             var claims = new[]
