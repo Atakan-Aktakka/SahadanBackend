@@ -26,12 +26,12 @@ namespace Sahadan.WebAPI.Controllers
         {
             return Ok(ApiResult<IEnumerable<PlayerResponseModel>>.Success(await _playerService.GetPlayers()));
         }
-        [HttpGet("{id}")]
+        [HttpGet("playerId={id:int}")]
         public async Task<IActionResult> GetPlayerById(int id)
         {
             return Ok(ApiResult<Player>.Success(await _playerService.GetPlayerById(id)));
         }
-        [HttpGet("team/{id}")]
+        [HttpGet("teamId={id:int}")]
         public async Task<IActionResult> GetPlayersByTeamId(int id)
         {
             return Ok(ApiResult<IEnumerable<Player>>.Success(await _playerService.GetPlayersByTeamId(id)));

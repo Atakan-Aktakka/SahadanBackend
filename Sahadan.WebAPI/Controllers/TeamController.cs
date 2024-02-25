@@ -27,12 +27,12 @@ namespace Sahadan.WebAPI.Controllers
         {
             return Ok(ApiResult<IEnumerable<TeamResponseModel>>.Success(await _teamService.GetTeams()));
         }
-        [HttpGet("{id}")]
+        [HttpGet("teamId={id:int}")]
         public async Task<IActionResult> GetTeamById(int id)
         {
             return Ok(ApiResult<Team>.Success(await _teamService.GetTeamById(id)));
         }
-        [HttpGet("legue/{id}")]
+        [HttpGet("legueId={id:int}")]
         public async Task<IActionResult> GetTeamsByLegueId(int id)
         {
             return Ok(ApiResult<IEnumerable<Team>>.Success(await _teamService.GetTeamsByLegueId(id)));
@@ -50,7 +50,7 @@ namespace Sahadan.WebAPI.Controllers
                 return BadRequest(ApiResult<CreateTeamModelResponse>.Failure(new List<string> { ex.Message }));
             }
         }
-         [HttpPut("{id:int}")]
+         [HttpPut("update/{id:int}")]
         public async Task<IActionResult> Update(int id, UpdateTeamModel team)
         {
             try

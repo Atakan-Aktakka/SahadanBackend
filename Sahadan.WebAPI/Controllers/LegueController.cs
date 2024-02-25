@@ -27,12 +27,12 @@ namespace Sahadan.WebAPI.Controllers
         {
             return Ok(ApiResult<IEnumerable<LegueResponseModel>>.Success(await _legueService.GetLegues()));
         }
-        [HttpGet("{id}")]
+        [HttpGet("getbyid/legueId={id:int}")]
         public async Task<IActionResult> GetLegueById(int id)
         {
             return Ok(ApiResult<Legue>.Success(await _legueService.GetLegueById(id)));
         }
-        [HttpGet("getbycountry/countryId={id}")]
+        [HttpGet("getbycountry/countryId={id:int}")]
         public async Task<IActionResult> GetLeguesByCountryId(int id)
         {
             return Ok(ApiResult<IEnumerable<Legue>>.Success(await _legueService.GetLeguesByCountryId(id)));
@@ -49,7 +49,7 @@ namespace Sahadan.WebAPI.Controllers
                 return BadRequest(ApiResult<CreateLegueModelResponse>.Failure(new List<string> { ex.Message }));
             }
         }
-        [HttpPut("{id:int}")]
+        [HttpPut("update/{id:int}")]
         public async Task<IActionResult> Update(int id,UpdateLegueModel legue)
         {
             try{

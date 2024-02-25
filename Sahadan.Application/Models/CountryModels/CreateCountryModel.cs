@@ -8,6 +8,7 @@ namespace Sahadan.Application.Models
     public class CreateCountryModel
     {
         public string CountryName { get; set; }
+        public string CountryLogo { get; set; }
     }
     public class CreateCountryModelResponse
     {

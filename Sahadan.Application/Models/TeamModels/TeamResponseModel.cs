@@ -9,5 +9,7 @@ namespace Sahadan.Application.Models.TeamModels
     {
         public int TeamId { get; set; }
         public string TeamName { get; set; }
+        public int LegueId { get; set; }
+        public string TeamLogo { get; set; }
     }
 }

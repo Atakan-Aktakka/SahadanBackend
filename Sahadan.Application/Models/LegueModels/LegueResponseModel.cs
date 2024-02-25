@@ -10,5 +10,6 @@ namespace Sahadan.Application.Models.LegueModels
         public int LegueId { get; set; }
         public string LegueName { get; set; }
         public int CountryId { get; set; }
+        public string LegueLogo { get; set; }
     }
 }

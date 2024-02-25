@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Sahadan.WebAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+285d849cefaf6d45d19a310d420bcfc1a126d2fe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bd6c5e0b2c465dd160c5a0517c9ba0c09d519448")]
 [assembly: System.Reflection.AssemblyProductAttribute("Sahadan.WebAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Sahadan.WebAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -12,6 +12,7 @@
 /Users/atakanaktakka/Desktop/SahadanBackend/Sahadan.Entities/bin/Debug/net8.0/Sahadan.Entities.deps.json
 /Users/atakanaktakka/Desktop/SahadanBackend/Sahadan.Entities/bin/Debug/net8.0/Sahadan.Entities.dll
 /Users/atakanaktakka/Desktop/SahadanBackend/Sahadan.Entities/bin/Debug/net8.0/Sahadan.Entities.pdb
+/Users/atakanaktakka/Desktop/SahadanBackend/Sahadan.Entities/obj/Debug/net8.0/Sahadan.Entities.csproj.AssemblyReference.cache
 /Users/atakanaktakka/Desktop/SahadanBackend/Sahadan.Entities/obj/Debug/net8.0/Sahadan.Entities.GeneratedMSBuildEditorConfig.editorconfig
 /Users/atakanaktakka/Desktop/SahadanBackend/Sahadan.Entities/obj/Debug/net8.0/Sahadan.Entities.AssemblyInfoInputs.cache
 /Users/atakanaktakka/Desktop/SahadanBackend/Sahadan.Entities/obj/Debug/net8.0/Sahadan.Entities.AssemblyInfo.cs
@@ -21,4 +22,3 @@
 /Users/atakanaktakka/Desktop/SahadanBackend/Sahadan.Entities/obj/Debug/net8.0/refint/Sahadan.Entities.dll
 /Users/atakanaktakka/Desktop/SahadanBackend/Sahadan.Entities/obj/Debug/net8.0/Sahadan.Entities.pdb
 /Users/atakanaktakka/Desktop/SahadanBackend/Sahadan.Entities/obj/Debug/net8.0/ref/Sahadan.Entities.dll
-/Users/atakanaktakka/Desktop/SahadanBackend/Sahadan.Entities/obj/Debug/net8.0/Sahadan.Entities.csproj.AssemblyReference.cache

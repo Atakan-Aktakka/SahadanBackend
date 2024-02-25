@@ -24,7 +24,7 @@ namespace Sahadan.WebAPI.Controllers
         {
             return Ok(ApiResult<IEnumerable<UserResponseModel>>.Success(await _userService.GetAllUsers()));
         }
-        [HttpGet("{id}")]
+        [HttpGet("userId={id:int}")]
         public async Task<IActionResult> GetUserById(int id)
         {
             return Ok(ApiResult<UserResponseModel>.Success(await _userService.GetUserById(id)));
