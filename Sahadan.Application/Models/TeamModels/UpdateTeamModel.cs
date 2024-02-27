@@ -8,6 +8,8 @@ namespace Sahadan.Application.Models.TeamModels
     public class UpdateTeamModel
     {
         public string TeamName { get; set; }
+        public string TeamLogo { get; set; }
+        public int LegueId { get; set; }
     }
     public class UpdateTeamModelResponse
     {

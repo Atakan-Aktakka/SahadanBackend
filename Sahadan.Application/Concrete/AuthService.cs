@@ -1,19 +1,12 @@
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
-using Azure.Core;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Sahadan.Application.Abstract;
 using Sahadan.Application.Models.UserModels;
 using Sahadan.DataAccess.Abstract;
-using Sahadan.DataAccess.Identity;
 using Sahadan.Entities.Concrete;
 
 
@@ -33,7 +26,7 @@ namespace Sahadan.Application.Concrete
 
         }
 
-        public Task<AccessToken> CreateAccessToken(UserTest user)
+        public Task<Entities.Utilities.Security.JWT.AccessToken> CreateAccessTokenAsync(UserResponseModel user)
         {
             throw new NotImplementedException();
         }
@@ -66,10 +59,6 @@ namespace Sahadan.Application.Concrete
             return userToReturn;
         }
 
-        public Task<bool> UserExists(string userName)
-        {
-            throw new NotImplementedException();
-        }
 
         private string GenerateToken(int userId, string username)
         {

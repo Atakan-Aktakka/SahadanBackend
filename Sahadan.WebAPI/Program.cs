@@ -11,25 +11,30 @@ using Sahadan.DataAccess.Abstract;
 
 using Sahadan.DataAccess.Concrete.EntityFrameWork;
 using Sahadan.DataAccess.Concrete.EntityFrameWork.Contexts;
+using Sahadan.WebAPI;
 using Sahadan.WebAPI.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var config = builder.Configuration;
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
-            ValidateIssuer = false,
-            ValidateAudience = false
-        };
-    });
+builder.Services.AddAuthentication(x=>{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x=>{
+    x.TokenValidationParameters = new TokenValidationParameters{
+        ValidIssuer =config["JwtSettings:Issuer"], 
+        ValidAudience = config["JwtSettings:Audience"], 
+        IssuerSigningKey= new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JwtSettings:Key"]!)),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true
+    };
+});
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new() { Title = "Sahadan.WebAPI", Version = "v1" });
@@ -87,11 +92,16 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sahadan"); });
 }
 
 app.UseHttpsRedirection();
 app.UseCors("MyPolicy");
+
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 app.MapControllers(); // Map all controllers in the application
 
 app.Run();

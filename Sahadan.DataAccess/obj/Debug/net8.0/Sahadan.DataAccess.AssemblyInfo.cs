@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Sahadan.DataAccess")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bd6c5e0b2c465dd160c5a0517c9ba0c09d519448")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a4e1de2be6f0406e6c753865e8d274e9f5ccfde6")]
 [assembly: System.Reflection.AssemblyProductAttribute("Sahadan.DataAccess")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Sahadan.DataAccess")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Sahadan.Application.Models.UserModels;
+using Sahadan.Entities.Utilities.Security.JWT;
 
 namespace Sahadan.Application.Abstract
 {
@@ -10,7 +11,7 @@ namespace Sahadan.Application.Abstract
     {
         Task<UserResponseModel> LoginAsync(LoginUserModel userToLoginDTO);
         Task<UserResponseModel> RegisterAsync(RegisterUserModel userToRegisterDTO);
-       
+        Task<AccessToken> CreateAccessTokenAsync(UserResponseModel user);
 
     }
 }

@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sahadan.Application.Abstract;
 using Sahadan.Application.Models;
-using Sahadan.DataAccess.Abstract;
 using Sahadan.Entities.Concrete;
-using Sahadan.WebAPI;
 
 namespace Sahadan.WebAPI.Controllers
 {
@@ -24,12 +19,14 @@ namespace Sahadan.WebAPI.Controllers
 
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetCountries()
         {
             return Ok(ApiResult<IEnumerable<CountryResponseModel>>.Success(await _countryService.GetCountries()));
             //return Ok(await _countryService.GetCountries());
         }
         [HttpGet("{id}")]
+        
         public async Task<IActionResult> GetCountryById(int id)
         {
             return Ok(ApiResult<Country>.Success(await _countryService.GetCountryById(id)));
