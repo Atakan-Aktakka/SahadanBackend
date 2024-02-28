@@ -22,14 +22,11 @@ namespace Sahadan.Application.Concrete
             _mapper = mapper;
         }
 
-        public async Task<CreateUserModelResponse> CreateUser(CreateUserModel createUserModel)
+        public async Task<User> CreateUser(User createUserModel)
         {
            var userList = _mapper.Map<User>(createUserModel);
            var addedUser = await _userRepository.Add(userList);
-              return new CreateUserModelResponse
-              {
-                UserId = addedUser.UserId
-              };
+              return addedUser;
         }
 
         public async Task<BaseReponseModel> DeleteUser(int userId)
@@ -51,6 +48,19 @@ namespace Sahadan.Application.Concrete
             return _mapper.Map<IEnumerable<UserResponseModel>>(userList);
         }
 
+        public async Task<User> GetByMail(string email)
+        {
+            var userList = await _userRepository.GetAsync(u => u.Email == email);
+            return _mapper.Map<User>(userList);
+
+        }
+
+        public async Task<List<UserRole>> GetRoles(User user)
+        {
+           var userRoles = await _userRepository.GetRoles(user);
+              return userRoles;
+        }
+
         public async Task<UserResponseModel> GetUserById(int userId)
         {
             var userList = await _userRepository.GetById(userId);
@@ -64,8 +74,8 @@ namespace Sahadan.Application.Concrete
             {
                 throw new Exception("User not found");
             }
-            userList.UserName = updateUserModel.UserName;
-            userList.Password = updateUserModel.Password;
+            userList.FirstName = updateUserModel.UserName;
+            userList.LastName = updateUserModel.Password;
             userList.Email = updateUserModel.Email;
             return new UpdateUserModelResponse
             {

@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sahadan.Application.Abstract;
 using Sahadan.Application.Models;
 using Sahadan.Application.Models.TeamModels;
-using Sahadan.DataAccess.Abstract;
 using Sahadan.Entities.Concrete;
-using Sahadan.WebAPI;
 
 namespace Sahadan.WebAPI.Controllers
 {
@@ -37,6 +32,7 @@ namespace Sahadan.WebAPI.Controllers
         {
             return Ok(ApiResult<IEnumerable<Team>>.Success(await _teamService.GetTeamsByLegueId(id)));
         }
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Add(CreateTeamModel team)
         {
@@ -50,12 +46,13 @@ namespace Sahadan.WebAPI.Controllers
                 return BadRequest(ApiResult<CreateTeamModelResponse>.Failure(new List<string> { ex.Message }));
             }
         }
-         [HttpPut("update/{id:int}")]
+        [Authorize]
+        [HttpPut("update/{id:int}")]
         public async Task<IActionResult> Update(int id, UpdateTeamModel team)
         {
             try
             {
-                var result = await _teamService.Update(id,team);
+                var result = await _teamService.Update(id, team);
                 return Ok(ApiResult<UpdateTeamModelResponse>.Success(result));
             }
             catch (Exception ex)
@@ -63,8 +60,8 @@ namespace Sahadan.WebAPI.Controllers
                 return BadRequest(ApiResult<UpdateTeamModelResponse>.Failure(new List<string> { ex.Message }));
             }
         }
-
-       [HttpDelete("{id}")]
+        [Authorize]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try

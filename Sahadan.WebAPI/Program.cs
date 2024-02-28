@@ -1,38 +1,34 @@
-using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Sahadan.Application.Abstract;
 using Sahadan.Application.Concrete;
 using Sahadan.Application.MappingProfiles;
 using Sahadan.DataAccess.Abstract;
-
 using Sahadan.DataAccess.Concrete.EntityFrameWork;
 using Sahadan.DataAccess.Concrete.EntityFrameWork.Contexts;
-using Sahadan.WebAPI;
-using Sahadan.WebAPI.Controllers;
+using Sahadan.Entities.Utilities.Security.Encrption;
+using Sahadan.Entities.Utilities.Security.JWT;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
+var tokenOptions = config.GetSection("TokenOptions").Get<TokenOptions>();
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddAuthentication(x=>{
-    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(x=>{
-    x.TokenValidationParameters = new TokenValidationParameters{
-        ValidIssuer =config["JwtSettings:Issuer"], 
-        ValidAudience = config["JwtSettings:Audience"], 
-        IssuerSigningKey= new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JwtSettings:Key"]!)),
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true
-    };
-});
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidIssuer = tokenOptions.Issuer,
+                        ValidAudience = tokenOptions.Audience,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+                    };
+                });
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(options =>
@@ -67,6 +63,8 @@ builder.Services.AddScoped<ILegueRepository, LegueRepository>();
 builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ITokenHelper, JwtHelper>();
+builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 
 // Register services
 builder.Services.AddScoped<ICountryService, CountryService>();
@@ -75,6 +73,7 @@ builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<ITeamService, TeamService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IUserRoleService, UserRoleService>();
 
 builder.Services.AddAutoMapper(typeof(IMappingProfilesMarker));
 builder.Services.AddCors();

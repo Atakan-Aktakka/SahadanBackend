@@ -6,7 +6,7 @@ using Sahadan.Entities.Abstract;
 
 namespace Sahadan.Entities.Concrete
 {
-    public class UserClaims:IEntity
+    public class UserClaim:IEntity
     {
         public int Id { get; set; }
         public int UserId { get; set; }

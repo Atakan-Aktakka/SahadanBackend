@@ -18,5 +18,8 @@ namespace Sahadan.DataAccess.Concrete.EntityFrameWork.Contexts
         public DbSet<Legue> Legues { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Player> Players { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<UserClaim> UserClaims { get; set; }
+
     }
 }

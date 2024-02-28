@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Sahadan.Application.Abstract;
 using Sahadan.Application.Models;
 using Sahadan.Application.Models.UserModels;
+using Sahadan.Entities.Utilities.Security.JWT;
 
 namespace Sahadan.WebAPI.Controllers
 {
@@ -22,22 +23,22 @@ namespace Sahadan.WebAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginUserModel userResponseModel)
         {
-            try
-            {
-                var user = await _authService.LoginAsync(userResponseModel);
-                return Ok(ApiResult<UserResponseModel>.Success(user));
-            }catch(Exception ex)
-            {
+         try{
+            var result =  await _authService.LoginAsync(userResponseModel);
+            var resultToken = await _authService.CreateAccessTokenAsync(result);
+            return Ok(ApiResult<AccessToken>.Success(resultToken));
+         }catch(Exception ex){
                 return BadRequest(ApiResult<UserResponseModel>.Failure(new List<string> { ex.Message }));
-            }
+         }
         }
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterUserModel createUserModel)
+        public async Task<IActionResult> Register(CreateUserModel createUserModel)
         {
             try
             {
                 var result = await _authService.RegisterAsync(createUserModel);
-                return Ok(ApiResult<UserResponseModel>.Success(result));
+                var resultToken = await _authService.CreateAccessTokenAsync(result);
+               return Ok(ApiResult<AccessToken>.Success(resultToken));
             }
             catch (Exception ex)
             {

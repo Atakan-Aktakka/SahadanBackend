@@ -8,6 +8,6 @@ namespace Sahadan.Entities.Utilities.Security.JWT
 {
     public interface ITokenHelper
     {
-         AccessToken CreateToken(UserTest user, List<UserRoles> operationClaims);
+        Task<AccessToken>CreateToken(User user, List<UserRole> operationClaims);
     }
 }

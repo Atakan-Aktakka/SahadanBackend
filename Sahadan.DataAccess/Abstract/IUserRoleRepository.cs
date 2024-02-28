@@ -6,8 +6,8 @@ using Sahadan.Entities.Concrete;
 
 namespace Sahadan.DataAccess.Abstract
 {
-    public interface IUserRepository:IBaseRepository<User>
+    public interface IUserRoleRepository:IBaseRepository<UserRole>
     {
-        Task<List<UserRole>> GetRoles(User user);
+        
     }
 }

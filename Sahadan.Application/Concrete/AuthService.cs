@@ -2,61 +2,67 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using AutoMapper;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Sahadan.Application.Abstract;
 using Sahadan.Application.Models.UserModels;
-using Sahadan.DataAccess.Abstract;
 using Sahadan.Entities.Concrete;
+using Sahadan.Entities.Utilities.Security.Hashing;
+using Sahadan.Entities.Utilities.Security.JWT;
 
 
 namespace Sahadan.Application.Concrete
 {
     public class AuthService : IAuthService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
-        private readonly IConfiguration _configuration;
+        private readonly ITokenHelper _tokenHelper;
 
-        public AuthService(IMapper mapper, IUserRepository userRepository, IConfiguration configuration)
+        public AuthService(IMapper mapper, IUserService userService, ITokenHelper tokenHelper)
         {
-            _userRepository = userRepository;
+            _userService = userService;
             _mapper = mapper;
-            _configuration = configuration;
+            _tokenHelper = tokenHelper;
 
         }
 
-        public Task<Entities.Utilities.Security.JWT.AccessToken> CreateAccessTokenAsync(UserResponseModel user)
+        public async Task<AccessToken> CreateAccessTokenAsync(User user)
         {
-            throw new NotImplementedException();
+           var userRoles = await _userService.GetRoles(user);
+           var token = await _tokenHelper.CreateToken(user, userRoles);
+            return token;
         }
 
-        public async Task<UserResponseModel> LoginAsync(LoginUserModel userToLoginDTO)
+        public async Task<User> LoginAsync(LoginUserModel userToLoginDTO)
         {
-            var user = await _userRepository.GetAsync(u => u.UserName == userToLoginDTO.UserName.ToLower() && u.Password == userToLoginDTO.Password);
-
-            if (user == null)
+            var userToCheck = await _userService.GetByMail(userToLoginDTO.Email);
+            if (userToCheck == null)
             {
-                return null;
+                throw new System.Exception("User not found");
             }
-
-            var userToReturn = _mapper.Map<UserResponseModel>(user);
-            userToReturn.Token = GenerateToken(user.UserId, user.UserName);
-
-            return userToReturn;
+            if (!HashingHelper.VerifyPasswordHash(userToLoginDTO.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt))
+            {
+                throw new System.Exception("Password is wrong");
+            }
+            return _mapper.Map<User>(userToCheck);
         }
 
 
-        public async Task<UserResponseModel> RegisterAsync(RegisterUserModel userToRegisterDTO)
+        public async Task<User> RegisterAsync(CreateUserModel userToRegisterDTO)
         {
-            userToRegisterDTO.UserName = userToRegisterDTO.UserName.ToLower();
-
-            var addedUser = await _userRepository.Add(_mapper.Map<User>(userToRegisterDTO));
-
-            var userToReturn = _mapper.Map<UserResponseModel>(addedUser);
-            userToReturn.Token = GenerateToken(addedUser.UserId, addedUser.UserName);
-
-            return userToReturn;
+            byte[] passwordHash, passwordSalt;
+            HashingHelper.CreatePasswordHash(userToRegisterDTO.Password, out passwordHash, out passwordSalt);
+            var user = new User
+            {
+                FirstName = userToRegisterDTO.FirstName,
+                LastName = userToRegisterDTO.LastName,
+                Email = userToRegisterDTO.Email,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                Status = true
+            };
+            var addedUser = await _userService.CreateUser(user);
+            return addedUser;
         }
 
 

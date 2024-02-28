@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -23,24 +24,9 @@ namespace Sahadan.Entities.Utilities.Security.JWT
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
         }
-            public AccessToken CreateToken(UserTest user, List<UserRoles> operationClaims)
-        {
-            _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
-            var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
-            var signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey);
-            var jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials, operationClaims);
-            var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
-            var token = jwtSecurityTokenHandler.WriteToken(jwt);
-
-            return new AccessToken
-            {
-                Token = token,
-                Expiration = _accessTokenExpiration
-            };
-
-        }
-        public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, UserTest user,
-            SigningCredentials signingCredentials, List<UserRoles> operationClaims)
+       
+        public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user,
+            SigningCredentials signingCredentials, List<UserRole> operationClaims)
         {
             var jwt = new JwtSecurityToken(
                 issuer: tokenOptions.Issuer,
@@ -52,15 +38,41 @@ namespace Sahadan.Entities.Utilities.Security.JWT
             );
             return jwt;
         }
-        private IEnumerable<Claim> SetClaims(UserTest user, List<UserRoles> operationClaims)
+        private IEnumerable<Claim> SetClaims(User user, List<UserRole> operationClaims)
         {
             var claims = new List<Claim>();
-            claims.AddNameIdentifier(user.Id.ToString());
+            claims.AddNameIdentifier(user.UserId.ToString());
             claims.AddEmail(user.Email);
             claims.AddName($"{user.FirstName} {user.LastName}");
             claims.AddRoles(operationClaims.Select(c => c.Name).ToArray());
 
             return claims;
+        }
+
+        public Task<AccessToken> CreateToken(User user, List<UserRole> operationClaims)
+        {
+           var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenOptions.SecurityKey));
+    var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+    var jwt = new JwtSecurityToken(
+        issuer: _tokenOptions.Issuer,
+        audience: _tokenOptions.Audience,
+        expires: DateTime.Now.AddHours(1),
+        notBefore: DateTime.Now,
+        claims: SetClaims(user, operationClaims),
+        signingCredentials: signingCredentials
+    );
+
+    var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+    var token = jwtSecurityTokenHandler.WriteToken(jwt);
+
+    var accessToken = new AccessToken
+    {
+        Token = token,
+        Expiration = _accessTokenExpiration
+    };
+
+    return Task.FromResult(accessToken);
         }
     }
 }

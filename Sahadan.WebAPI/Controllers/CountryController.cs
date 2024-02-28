@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sahadan.Application.Abstract;
@@ -19,7 +18,7 @@ namespace Sahadan.WebAPI.Controllers
 
         }
         [HttpGet]
-        [Authorize]
+        
         public async Task<IActionResult> GetCountries()
         {
             return Ok(ApiResult<IEnumerable<CountryResponseModel>>.Success(await _countryService.GetCountries()));
@@ -31,6 +30,7 @@ namespace Sahadan.WebAPI.Controllers
         {
             return Ok(ApiResult<Country>.Success(await _countryService.GetCountryById(id)));
         }
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddAsync(CreateCountryModel createCountry)
         {
@@ -44,7 +44,7 @@ namespace Sahadan.WebAPI.Controllers
                 return BadRequest(ApiResult<CreateCountryModelResponse>.Failure(new List<string> { ex.Message }));
             }
         }
-
+        [Authorize]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, UpdateCountryModel country)
         {
@@ -58,7 +58,7 @@ namespace Sahadan.WebAPI.Controllers
                 return BadRequest(ApiResult<UpdateCountryModelResponse>.Failure(new List<string> { ex.Message }));
             }
         }
-
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

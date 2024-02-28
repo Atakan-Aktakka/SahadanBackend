@@ -2,13 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Sahadan.Entities.Abstract;
 
-namespace Sahadan.Entities.Concrete
+namespace Sahadan.Application.Models.UserRoleModels
 {
-    public class UserRoles:IEntity
+    public class UserRoleResponseModel
     {
-        public int Id { get; set; }
+         public int RoleId { get; set; }
         public string Name { get; set; }
     }
 }

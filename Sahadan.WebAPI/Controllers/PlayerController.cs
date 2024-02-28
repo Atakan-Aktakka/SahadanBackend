@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sahadan.Application.Abstract;
 using Sahadan.Application.Models;
 using Sahadan.Application.Models.PlayerModels;
-using Sahadan.DataAccess.Abstract;
 using Sahadan.Entities.Concrete;
 
 namespace Sahadan.WebAPI.Controllers
@@ -36,6 +32,7 @@ namespace Sahadan.WebAPI.Controllers
         {
             return Ok(ApiResult<IEnumerable<Player>>.Success(await _playerService.GetPlayersByTeamId(id)));
         }
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Add(CreatePlayerModel player)
         {
@@ -49,18 +46,21 @@ namespace Sahadan.WebAPI.Controllers
                 return BadRequest(ApiResult<CreatePlayerModelResponse>.Failure(new List<string> { ex.Message }));
             }
         }
+        [Authorize]
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update(int id ,UpdatePlayerModel player)
+        public async Task<IActionResult> Update(int id, UpdatePlayerModel player)
         {
-           try{
-               var result = await _playerService.Update(id,player);
-               return Ok(ApiResult<UpdatePlayerModelResponse>.Success(result));
-           }
-           catch(Exception ex)
-           {
-               return BadRequest(ApiResult<UpdatePlayerModelResponse>.Failure(new List<string> { ex.Message }));
-           }
+            try
+            {
+                var result = await _playerService.Update(id, player);
+                return Ok(ApiResult<UpdatePlayerModelResponse>.Success(result));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ApiResult<UpdatePlayerModelResponse>.Failure(new List<string> { ex.Message }));
+            }
         }
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
