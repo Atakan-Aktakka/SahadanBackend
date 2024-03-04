@@ -29,7 +29,7 @@ namespace Sahadan.WebAPI.Controllers
         {
             return Ok(ApiResult<IEnumerable<UserRoleResponseModel>>.Success(await _userRoleService.GetRoles()));
         }
-        [HttpPost]
+        [HttpPost("Roleadd")]
         public async Task<IActionResult> AddRole(CreateUserRoleModel userRole)
         {
             try

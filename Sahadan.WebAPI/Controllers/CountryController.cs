@@ -31,7 +31,7 @@ namespace Sahadan.WebAPI.Controllers
             return Ok(ApiResult<Country>.Success(await _countryService.GetCountryById(id)));
         }
         [Authorize]
-        [HttpPost]
+       [HttpPost("Countryadd")]
         public async Task<IActionResult> AddAsync(CreateCountryModel createCountry)
         {
             try

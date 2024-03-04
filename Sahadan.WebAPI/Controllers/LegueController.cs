@@ -33,7 +33,7 @@ namespace Sahadan.WebAPI.Controllers
             return Ok(ApiResult<IEnumerable<Legue>>.Success(await _legueService.GetLeguesByCountryId(id)));
         }
         [Authorize]
-        [HttpPost]
+        [HttpPost("Legueadd")]
         public async Task<IActionResult> Add(CreateLegueModel legue)
         {
             try

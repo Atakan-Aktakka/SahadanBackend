@@ -33,7 +33,7 @@ namespace Sahadan.WebAPI.Controllers
             return Ok(ApiResult<IEnumerable<Player>>.Success(await _playerService.GetPlayersByTeamId(id)));
         }
         [Authorize]
-        [HttpPost]
+        [HttpPost("Playeradd")]
         public async Task<IActionResult> Add(CreatePlayerModel player)
         {
             try
