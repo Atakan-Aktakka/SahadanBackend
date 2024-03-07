@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "V1YIVslqaPUBJs7Kb/rKM03YvpLiPeLvUWrkBh/CcxgCkP09hh5mEO6xWJB8CySE0yQuDu9acIVMvKVuoCLaug==",
+  "dgSpecHash": "bjucLRJWmzMyKmpJJbZ89xEZuZdbfIsmjkIv6U+/8yCmpEGNZF5W72pdRFJedaSh5cgO1NupnRhnmff5mopuGQ==",
   "success": true,
   "projectFilePath": "/Users/atakanaktakka/Desktop/SahadanBackend/Sahadan.Application/Sahadan.Application.csproj",
   "expectedPackageFiles": [
+    "/Users/atakanaktakka/.nuget/packages/autofac/8.0.0/autofac.8.0.0.nupkg.sha512",
     "/Users/atakanaktakka/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
     "/Users/atakanaktakka/.nuget/packages/azure.core/1.25.0/azure.core.1.25.0.nupkg.sha512",
     "/Users/atakanaktakka/.nuget/packages/azure.identity/1.7.0/azure.identity.1.7.0.nupkg.sha512",
@@ -68,7 +69,7 @@
     "/Users/atakanaktakka/.nuget/packages/system.componentmodel.annotations/4.5.0/system.componentmodel.annotations.4.5.0.nupkg.sha512",
     "/Users/atakanaktakka/.nuget/packages/system.configuration.configurationmanager/6.0.1/system.configuration.configurationmanager.6.0.1.nupkg.sha512",
     "/Users/atakanaktakka/.nuget/packages/system.diagnostics.debug/4.3.0/system.diagnostics.debug.4.3.0.nupkg.sha512",
-    "/Users/atakanaktakka/.nuget/packages/system.diagnostics.diagnosticsource/6.0.0/system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
+    "/Users/atakanaktakka/.nuget/packages/system.diagnostics.diagnosticsource/7.0.2/system.diagnostics.diagnosticsource.7.0.2.nupkg.sha512",
     "/Users/atakanaktakka/.nuget/packages/system.drawing.common/6.0.0/system.drawing.common.6.0.0.nupkg.sha512",
     "/Users/atakanaktakka/.nuget/packages/system.formats.asn1/5.0.0/system.formats.asn1.5.0.0.nupkg.sha512",
     "/Users/atakanaktakka/.nuget/packages/system.globalization/4.3.0/system.globalization.4.3.0.nupkg.sha512",

@@ -9,6 +9,7 @@ using Sahadan.DataAccess.Concrete.EntityFrameWork;
 using Sahadan.DataAccess.Concrete.EntityFrameWork.Contexts;
 using Sahadan.Entities.Utilities.Security.Encrption;
 using Sahadan.Entities.Utilities.Security.JWT;
+using Sahadan.Application.DependencyResolvers.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -56,8 +57,8 @@ builder.Services.AddSwaggerGen(options =>
                 { jwtSecurityScheme, Array.Empty<string>() }
             });
 });
-
-// Register repositories
+builder.Services.AddSahadanServices();
+/*// Register repositories
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<ILegueRepository, LegueRepository>();
 builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
@@ -73,7 +74,7 @@ builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<ITeamService, TeamService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IUserRoleService, UserRoleService>();
+builder.Services.AddScoped<IUserRoleService, UserRoleService>();*/
 
 builder.Services.AddAutoMapper(typeof(IMappingProfilesMarker));
 builder.Services.AddCors();

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Sahadan.Application.Abstract;
 using Sahadan.Application.Models;
@@ -26,6 +22,10 @@ namespace Sahadan.Application.Concrete
 
             var addedCountry = await _countryrepository.Add(countryList);
 
+            if (addedCountry == null)
+            {
+                throw new Exception("Country not added");
+            }
             return new CreateCountryModelResponse
             {
                 CountryId = addedCountry.CountryId
@@ -47,8 +47,9 @@ namespace Sahadan.Application.Concrete
 
         public async Task<IEnumerable<CountryResponseModel>> GetCountries()
         {
-            var CountryList = await _countryrepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<CountryResponseModel>>(CountryList);
+            var countryList = await _countryrepository.GetAllAsync();
+            return _mapper.Map<IEnumerable<CountryResponseModel>>(countryList);
+
         }
 
         public async Task<Country> GetCountryById(int id)
@@ -58,18 +59,19 @@ namespace Sahadan.Application.Concrete
             {
                 throw new Exception("Country not found");
             }
-            return _mapper.Map<Country>(countryList);
+            return countryList;
         }
+
 
         public async Task<UpdateCountryModelResponse> UpdateCountry(int id, UpdateCountryModel country)
         {
             var countryList = await _countryrepository.GetById(id);
-             if (countryList == null)
+            if (countryList == null)
             {
                 throw new Exception("Country not found");
             }
             countryList.CountryName = country.CountryName;
-           
+
             return new UpdateCountryModelResponse
             {
                 CountryId = (await _countryrepository.Update(countryList)).CountryId

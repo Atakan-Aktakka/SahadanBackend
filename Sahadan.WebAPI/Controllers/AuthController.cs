@@ -10,9 +10,8 @@ using Sahadan.Entities.Utilities.Security.JWT;
 
 namespace Sahadan.WebAPI.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class AuthController : ControllerBase
+
+    public class AuthController : BaseController
     {
         private readonly IAuthService _authService;
 
@@ -23,27 +22,20 @@ namespace Sahadan.WebAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginUserModel userResponseModel)
         {
-         try{
-            var result =  await _authService.LoginAsync(userResponseModel);
+
+            var result = await _authService.LoginAsync(userResponseModel);
             var resultToken = await _authService.CreateAccessTokenAsync(result);
             return Ok(ApiResult<AccessToken>.Success(resultToken));
-         }catch(Exception ex){
-                return BadRequest(ApiResult<UserResponseModel>.Failure(new List<string> { ex.Message }));
-         }
+
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(CreateUserModel createUserModel)
         {
-            try
-            {
-                var result = await _authService.RegisterAsync(createUserModel);
-                var resultToken = await _authService.CreateAccessTokenAsync(result);
-               return Ok(ApiResult<AccessToken>.Success(resultToken));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ApiResult<UserResponseModel>.Failure(new List<string> { ex.Message }));
-            }
+
+            var result = await _authService.RegisterAsync(createUserModel);
+            var resultToken = await _authService.CreateAccessTokenAsync(result);
+            return Ok(ApiResult<AccessToken>.Success(resultToken));
+
         }
     }
 }

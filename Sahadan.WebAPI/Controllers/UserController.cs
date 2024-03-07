@@ -10,9 +10,8 @@ using Sahadan.Application.Models.UserModels;
 
 namespace Sahadan.WebAPI.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UserController : ControllerBase
+
+    public class UserController : BaseController
     {
         private readonly IUserService _userService;
 
@@ -23,41 +22,32 @@ namespace Sahadan.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
-            return Ok(ApiResult<IEnumerable<UserResponseModel>>.Success(await _userService.GetAllUsers()));
+            var result = await _userService.GetAllUsers();
+            return Ok(ApiResult<IEnumerable<UserResponseModel>>.Success(result));
+
         }
         [Authorize]
         [HttpGet("userId={id:int}")]
         public async Task<IActionResult> GetUserById(int id)
         {
-            return Ok(ApiResult<UserResponseModel>.Success(await _userService.GetUserById(id)));
+            var result = await _userService.GetUserById(id);
+            return Ok(ApiResult<UserResponseModel>.Success(result));
+
         }
         [Authorize]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, UpdateUserModel updateUserModel)
         {
-            try
-            {
-                var result = await _userService.UpdateUser(id, updateUserModel);
-                return Ok(ApiResult<UpdateUserModelResponse>.Success(result));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ApiResult<UpdateUserModelResponse>.Failure(new List<string> { ex.Message }));
-            }
+            var result = await _userService.UpdateUser(id, updateUserModel);
+            return Ok(ApiResult<UpdateUserModelResponse>.Success(result));
         }
         [Authorize]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                var result = await _userService.DeleteUser(id);
-                return Ok(ApiResult<BaseReponseModel>.Success(result));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ApiResult<BaseReponseModel>.Failure(new List<string> { ex.Message }));
-            }
+            var result = await _userService.DeleteUser(id);
+            return Ok(ApiResult<BaseReponseModel>.Success(result));
+
         }
 
     }

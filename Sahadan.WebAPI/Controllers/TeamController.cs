@@ -7,9 +7,8 @@ using Sahadan.Entities.Concrete;
 
 namespace Sahadan.WebAPI.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class TeamController : ControllerBase
+
+    public class TeamController : BaseController
     {
         private readonly ITeamService _teamService;
 
@@ -20,59 +19,48 @@ namespace Sahadan.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetTeams()
         {
-            return Ok(ApiResult<IEnumerable<TeamResponseModel>>.Success(await _teamService.GetTeams()));
+            var result = await _teamService.GetTeams();
+            return Ok(ApiResult<IEnumerable<TeamResponseModel>>.Success(result));
         }
         [HttpGet("teamId={id:int}")]
         public async Task<IActionResult> GetTeamById(int id)
         {
-            return Ok(ApiResult<Team>.Success(await _teamService.GetTeamById(id)));
+            var result = await _teamService.GetTeamById(id);
+            return Ok(ApiResult<Team>.Success(result));
+
         }
         [HttpGet("legueId={id:int}")]
         public async Task<IActionResult> GetTeamsByLegueId(int id)
         {
-            return Ok(ApiResult<IEnumerable<Team>>.Success(await _teamService.GetTeamsByLegueId(id)));
+            var result = await _teamService.GetTeamsByLegueId(id);
+            return Ok(ApiResult<IEnumerable<Team>>.Success(result));
         }
         [Authorize]
         [HttpPost("Teamadd")]
         public async Task<IActionResult> Add(CreateTeamModel team)
         {
-            try
-            {
-                var result = await _teamService.Add(team);
-                return Ok(ApiResult<CreateTeamModelResponse>.Success(result));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ApiResult<CreateTeamModelResponse>.Failure(new List<string> { ex.Message }));
-            }
+
+            var result = await _teamService.Add(team);
+            return Ok(ApiResult<CreateTeamModelResponse>.Success(result));
+
         }
         [Authorize]
         [HttpPut("update/{id:int}")]
         public async Task<IActionResult> Update(int id, UpdateTeamModel team)
         {
-            try
-            {
-                var result = await _teamService.Update(id, team);
-                return Ok(ApiResult<UpdateTeamModelResponse>.Success(result));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ApiResult<UpdateTeamModelResponse>.Failure(new List<string> { ex.Message }));
-            }
+
+            var result = await _teamService.Update(id, team);
+            return Ok(ApiResult<UpdateTeamModelResponse>.Success(result));
+
         }
         [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                var result = await _teamService.Delete(id);
-                return Ok(ApiResult<BaseReponseModel>.Success(result));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ApiResult<BaseReponseModel>.Failure(new List<string> { ex.Message }));
-            }
+
+            var result = await _teamService.Delete(id);
+            return Ok(ApiResult<BaseReponseModel>.Success(result));
+
         }
     }
 }

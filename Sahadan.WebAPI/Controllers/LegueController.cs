@@ -7,9 +7,8 @@ using Sahadan.Entities.Concrete;
 
 namespace Sahadan.WebAPI.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class LegueController : ControllerBase
+
+    public class LegueController : BaseController
     {
         private readonly ILegueService _legueService;
 
@@ -20,59 +19,48 @@ namespace Sahadan.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetLegues()
         {
-            return Ok(ApiResult<IEnumerable<LegueResponseModel>>.Success(await _legueService.GetLegues()));
+            var result = await _legueService.GetLegues();
+            return Ok(ApiResult<IEnumerable<LegueResponseModel>>.Success(result));
+            
         }
         [HttpGet("getbyid/legueId={id:int}")]
         public async Task<IActionResult> GetLegueById(int id)
         {
-            return Ok(ApiResult<Legue>.Success(await _legueService.GetLegueById(id)));
+            var result = await _legueService.GetLegueById(id);
+            return Ok(ApiResult<Legue>.Success(result));
+            
         }
         [HttpGet("getbycountry/countryId={id:int}")]
         public async Task<IActionResult> GetLeguesByCountryId(int id)
         {
-            return Ok(ApiResult<IEnumerable<Legue>>.Success(await _legueService.GetLeguesByCountryId(id)));
+            var result = await _legueService.GetLeguesByCountryId(id);
+            return Ok(ApiResult<IEnumerable<Legue>>.Success(result));
+            
         }
         [Authorize]
         [HttpPost("Legueadd")]
         public async Task<IActionResult> Add(CreateLegueModel legue)
         {
-            try
-            {
-                var result = await _legueService.Add(legue);
-                return Ok(ApiResult<CreateLegueModelResponse>.Success(result));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ApiResult<CreateLegueModelResponse>.Failure(new List<string> { ex.Message }));
-            }
+            var result = await _legueService.Add(legue);
+            return Ok(ApiResult<CreateLegueModelResponse>.Success(result));
         }
         [Authorize]
         [HttpPut("update/{id:int}")]
         public async Task<IActionResult> Update(int id, UpdateLegueModel legue)
         {
-            try
-            {
-                var result = await _legueService.Update(id, legue);
-                return Ok(ApiResult<UpdateLegueModelResponse>.Success(result));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ApiResult<UpdateLegueModelResponse>.Failure(new List<string> { ex.Message }));
-            }
+
+            var result = await _legueService.Update(id, legue);
+            return Ok(ApiResult<UpdateLegueModelResponse>.Success(result));
+
         }
         [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                var result = await _legueService.Delete(id);
-                return Ok(ApiResult<BaseReponseModel>.Success(result));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ApiResult<BaseReponseModel>.Failure(new List<string> { ex.Message }));
-            }
+
+            var result = await _legueService.Delete(id);
+            return Ok(ApiResult<BaseReponseModel>.Success(result));
+
         }
     }
 }

@@ -9,9 +9,8 @@ using Sahadan.Application.Models.UserRoleModels;
 
 namespace Sahadan.WebAPI.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UserRoleController : ControllerBase
+
+    public class UserRoleController : BaseController
     {
         private readonly IUserRoleService _userRoleService;
 
@@ -22,51 +21,40 @@ namespace Sahadan.WebAPI.Controllers
         [HttpGet("userId={id:int}")]
         public async Task<IActionResult> GetUserRoleById(int id)
         {
-            return Ok(ApiResult<UserRoleResponseModel>.Success(await _userRoleService.GetRoleById(id)));
+            var result = await _userRoleService.GetRoleById(id);
+            return Ok(ApiResult<UserRoleResponseModel>.Success(result));
+           
         }
         [HttpGet]
         public async Task<IActionResult> GetUserRoles()
         {
-            return Ok(ApiResult<IEnumerable<UserRoleResponseModel>>.Success(await _userRoleService.GetRoles()));
+            var result = await _userRoleService.GetRoles();
+            return Ok(ApiResult<IEnumerable<UserRoleResponseModel>>.Success(result));
+            
         }
         [HttpPost("Roleadd")]
         public async Task<IActionResult> AddRole(CreateUserRoleModel userRole)
         {
-            try
-            {
+
                 var result = await _userRoleService.AddRole(userRole);
                 return Ok(ApiResult<CreateUserRoleResponseModel>.Success(result));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ApiResult<CreateUserRoleResponseModel>.Failure(new List<string> { ex.Message }));
-            }
+ 
         }
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateRole(int id, UpdateUserRoleModel userRole)
         {
-            try
-            {
+
                 var result = await _userRoleService.UpdateRole(id, userRole);
                 return Ok(ApiResult<UpdateUserRoleResponseModel>.Success(result));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ApiResult<UpdateUserRoleResponseModel>.Failure(new List<string> { ex.Message }));
-            }
+         
         }
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteRole(int id)
         {
-            try
-            {
+
                 var result = await _userRoleService.DeleteRole(id);
                 return Ok(ApiResult<BaseReponseModel>.Success(result));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ApiResult<BaseReponseModel>.Failure(new List<string> { ex.Message }));
-            }
+       
         }
     }
 }

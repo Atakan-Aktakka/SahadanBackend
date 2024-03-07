@@ -7,9 +7,8 @@ using Sahadan.Entities.Concrete;
 
 namespace Sahadan.WebAPI.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class PlayerController : ControllerBase
+
+    public class PlayerController : BaseController
     {
         private readonly IPlayerService _playerService;
 
@@ -20,59 +19,46 @@ namespace Sahadan.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetPlayers()
         {
-            return Ok(ApiResult<IEnumerable<PlayerResponseModel>>.Success(await _playerService.GetPlayers()));
+            var result = await _playerService.GetPlayers();
+            return Ok(ApiResult<IEnumerable<PlayerResponseModel>>.Success(result));
+            
         }
         [HttpGet("playerId={id:int}")]
         public async Task<IActionResult> GetPlayerById(int id)
         {
-            return Ok(ApiResult<Player>.Success(await _playerService.GetPlayerById(id)));
+            var result = await _playerService.GetPlayerById(id);
+            return Ok(ApiResult<Player>.Success(result));
         }
         [HttpGet("teamId={id:int}")]
         public async Task<IActionResult> GetPlayersByTeamId(int id)
         {
-            return Ok(ApiResult<IEnumerable<Player>>.Success(await _playerService.GetPlayersByTeamId(id)));
+            var result = await _playerService.GetPlayersByTeamId(id);
+            return Ok(ApiResult<IEnumerable<Player>>.Success(result));
+           
         }
         [Authorize]
         [HttpPost("Playeradd")]
         public async Task<IActionResult> Add(CreatePlayerModel player)
         {
-            try
-            {
-                var result = await _playerService.Add(player);
-                return Ok(ApiResult<CreatePlayerModelResponse>.Success(result));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ApiResult<CreatePlayerModelResponse>.Failure(new List<string> { ex.Message }));
-            }
+            var result = await _playerService.Add(player);
+            return Ok(ApiResult<CreatePlayerModelResponse>.Success(result));
         }
         [Authorize]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, UpdatePlayerModel player)
         {
-            try
-            {
-                var result = await _playerService.Update(id, player);
-                return Ok(ApiResult<UpdatePlayerModelResponse>.Success(result));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ApiResult<UpdatePlayerModelResponse>.Failure(new List<string> { ex.Message }));
-            }
+            var result = await _playerService.Update(id, player);
+            return Ok(ApiResult<UpdatePlayerModelResponse>.Success(result));
+
         }
         [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                var result = await _playerService.Delete(id);
-                return Ok(ApiResult<BaseReponseModel>.Success(result));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ApiResult<BaseReponseModel>.Failure(new List<string> { ex.Message }));
-            }
+
+            var result = await _playerService.Delete(id);
+            return Ok(ApiResult<BaseReponseModel>.Success(result));
+
         }
     }
 }
