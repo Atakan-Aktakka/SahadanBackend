@@ -1,4 +1,5 @@
-# SahadanBackend
+
+SahadanBackend
 Football Squad Listing Project with Layered Architecture
 
 This project provides a platform to record and list football fields, games, teams, and leagues. Users can add, edit, and delete leagues, teams, and players. Additionally, users can navigate between different leagues and countries.
@@ -6,7 +7,6 @@ This project provides a platform to record and list football fields, games, team
 Usage
 On the home page, view existing leagues and countries.
 Navigate to pages to add, edit, or delete leagues, teams, and players.
-
 API Guide
 You can interact with the backend using the API routes. Note that token-based authentication is required.
 
@@ -25,7 +25,6 @@ You can interact with the backend using the API routes. Note that token-based au
 /api/players/add: Add a new player.
 /api/players/edit/{id}: Update a specific player.
 /api/players/delete/{id}: Delete a specific player.
-
 Layered Architecture
 The project follows the following layered architecture:
 
